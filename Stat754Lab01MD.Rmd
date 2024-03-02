@@ -1,8 +1,32 @@
-#By GuoXiaodong 29/02/2024
-#frist Assignment Lab01 for Stat765 by Lisa Chan UOA
+---
+title: "Lab01MD"
+author: "Xiaodong Guo"
+date: "2024-03-02"
+output: html_document
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-# load library
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+#summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+#plot(pressure)
+```
+```{r, echo=FALSE}
 library(tidyverse)
 
 # set random seed
@@ -12,6 +36,7 @@ set.seed(seed)
 # generate alarm id, dates and region vectors
 alarms_id.vt <- paste0('alarms_', sample(LETTERS, size = 10, replace = FALSE))
 
+alarms_dates.vt <- paste0('d.',seq(Sys.Date()-60, Sys.Date(), by = '1 day'))  # 60 days back.
 
 alarms_region.vt <- c('AKL_North', 'AKL_Central', 'Waiheke','AKL_South', 'AKL_Others')
 
@@ -51,3 +76,11 @@ alarms_insight.df <- alarms_count.df %>%
   summarise(total = sum(frequency),
             percent_high = 100*sum(category == 'High') / n())
 
+alarms_signal_total.df<-alarms_insight.df%>%group_by(alarms_region,year)%>%summarise(totalAll=sum(total))
+
+
+ggplot(alarms_signal_total.df,aes(x=alarms_region,y=totalAll))+geom_point(mapping = aes(color = year))
+       
+
+```
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
