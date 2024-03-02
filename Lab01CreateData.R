@@ -4,6 +4,7 @@
 
 # load library
 library(tidyverse)
+library(knitr)
 
 # set random seed
 seed <- 230 # <Replaced by last 3 digits in Gxd's student ID here.>
@@ -12,6 +13,7 @@ set.seed(seed)
 # generate alarm id, dates and region vectors
 alarms_id.vt <- paste0('alarms_', sample(LETTERS, size = 10, replace = FALSE))
 
+alarms_dates.vt <- paste0('d.',seq(Sys.Date()-60, Sys.Date(), by = '1 day'))  # 60 days back.
 
 alarms_region.vt <- c('AKL_North', 'AKL_Central', 'Waiheke','AKL_South', 'AKL_Others')
 
@@ -42,7 +44,7 @@ alarms_insight.df <- alarms_count.df %>%
                    'day')) %>%
   select(-prefix) %>%
   mutate(category = if_else(frequency >= 200,#changed the shredhold because of 
-                                              #the change of seed. by Gxd
+                                              #the change of seed. by Guo
                             'High'
                             ,
                             'Low')) %>%
