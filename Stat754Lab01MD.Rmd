@@ -113,11 +113,10 @@ knitr::kable(alarms_summary_by_wday.df)
 
 #ggplot(alarms_signal_insignt.df,aes(x=alarms_region,y=totalAll))+geom_point(mapping = aes(color = year))
 
-
-
-
-
-       
-
 ```
+
+##Comment from Frank Guo
+ 
+The rules of R language are too flexible and easy to be confused. Most functions are not easy to understand without a solid math background and, thus, not easy to be called correctly. For convenient purposes or other reasons, almost all the functions have too many vars, and they are not easy to understand deeply. It may be easy to start but hard to write well.
+
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
