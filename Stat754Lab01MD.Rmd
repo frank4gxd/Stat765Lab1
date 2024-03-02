@@ -28,6 +28,7 @@ You can also embed plots, for example:
 ```
 ```{r, echo=FALSE}
 library(tidyverse)
+library(lubridate)
 
 # set random seed
 seed <- 230 # <Replaced by last 3 digits in Gxd's student ID here.>
@@ -53,33 +54,69 @@ alarms_info.df <- data.frame(alarm_ID = alarms_id.vt, alarms_region = alarms_reg
 
 #End of Generate DataSource
 
-#copy from Lecture note index2-6.pdf provided by Lisa Chan
 
-alarms_insight.df <- alarms_count.df %>%
-  pivot_longer(cols = !alarm_id, names_to = 'date'
+alarms_summary.df <- alarms_count.df%>%
+    pivot_longer(cols = !alarm_id, names_to = 'date'
                , values_to = 'frequency') %>%
   separate(date, c('prefix'
-                   ,
-                   'year'
-                   ,
-                   'month'
-                   ,
-                   'day')) %>%
+                   ,'alarm_date'),extra = "merge") %>%
   select(-prefix) %>%
-  mutate(category = if_else(frequency >= 200,#changed the shredhold because of 
+   left_join(alarms_info.df, by = c('alarm_id' = 'alarm_ID')) %>%
+  group_by(alarm_date, alarms_region) %>%
+summarise(total = sum(frequency))
+#copy from Lecture note index2-6.pdf provided by Lisa Chan
+knitr::kable(alarms_summary.df)
+
+#alarms_insight.df <- alarms_count.df %>%
+ # pivot_longer(cols = !alarm_id, names_to = 'date'
+              # , values_to = 'frequency') %>%
+#  separate(date, c('prefix'
+ #                  ,
+  #                 'year'
+  #                 ,
+   #                'month'
+    #               ,
+     #              'day')) %>%
+  #select(-prefix) %>%
+  #mutate(category = if_else(frequency >= 230,#changed the shredhold because of 
                                               #the change of seed. by Gxd
-                            'High'
-                            ,
-                            'Low')) %>%
-  left_join(alarms_info.df, by = c('alarm_id' = 'alarm_ID')) %>%
-  group_by(year, month, day, alarms_region) %>%
-  summarise(total = sum(frequency),
-            percent_high = 100*sum(category == 'High') / n())
+   #                         'High'
+    #                        ,
+     #                       'Low')) %>%
+  #left_join(alarms_info.df, by = c('alarm_id' = 'alarm_ID')) %>%
+  #group_by(year, month, day, alarms_region) %>%
+#summarise(total = sum(frequency))
+      #by Gxd   percent_high = 100*sum(category == 'High') / n())
+alarms_signal_average.df<- alarms_summary.df%>%group_by(alarms_region)%>%summarise(average=round(mean(total))) 
 
-alarms_signal_total.df<-alarms_insight.df%>%group_by(alarms_region,year)%>%summarise(totalAll=sum(total))
+knitr::kable(alarms_signal_average.df)
+
+ggplot(alarms_signal_average.df,aes(x=alarms_region,y=average))+geom_bar(stat="identity")
+
+#end of Lab01 No.2
 
 
-ggplot(alarms_signal_total.df,aes(x=alarms_region,y=totalAll))+geom_point(mapping = aes(color = year))
+week_string<-c("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
+
+
+alarms_summary_by_wday.df<-
+  alarms_summary.df%>%
+  mutate(m_week_day=week_string[as.numeric(wday(as.Date(ymd(alarm_date),label=TRUE,week_start=1)))])%>%
+group_by(m_week_day)%>%
+ summarise(week_day_total=sum(total))%>%filter((week_day_total==max(week_day_total))|(week_day_total==min(week_day_total)) )
+
+knitr::kable(alarms_summary_by_wday.df)
+
+#end of Lab01 No.3
+
+#alarms_signal_total.df<-alarms_insight.df%>%group_by(alarms_region,year)%>%summarise(totalAll=sum(total))
+
+#ggplot(alarms_signal_insignt.df,aes(x=alarms_region,y=totalAll))+geom_point(mapping = aes(color = year))
+
+
+
+
+
        
 
 ```

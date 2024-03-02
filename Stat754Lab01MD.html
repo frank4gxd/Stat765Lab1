@@ -381,11 +381,1595 @@ chunk like this:</p>
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
-## `summarise()` has grouped output by &#39;year&#39;, &#39;month&#39;, &#39;day&#39;. You can override using the `.groups` argument.
-## `summarise()` has grouped output by &#39;alarms_region&#39;. You can override using the `.groups` argument.</code></pre>
-<p><img src="data:image/png;base64,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" width="672" />
-Note that the <code>echo = FALSE</code> parameter was added to the code
-chunk to prevent printing of the R code that generated the plot.</p>
+## `summarise()` has grouped output by &#39;alarm_date&#39;. You can override using the `.groups` argument.</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">alarm_date</th>
+<th align="left">alarms_region</th>
+<th align="right">total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2024.01.02</td>
+<td align="left">AKL_Central</td>
+<td align="right">253</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.02</td>
+<td align="left">AKL_North</td>
+<td align="right">158</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.02</td>
+<td align="left">AKL_Others</td>
+<td align="right">158</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.02</td>
+<td align="left">AKL_South</td>
+<td align="right">183</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.02</td>
+<td align="left">Waiheke</td>
+<td align="right">424</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.03</td>
+<td align="left">AKL_Central</td>
+<td align="right">113</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.03</td>
+<td align="left">AKL_North</td>
+<td align="right">202</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.03</td>
+<td align="left">AKL_Others</td>
+<td align="right">364</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.03</td>
+<td align="left">AKL_South</td>
+<td align="right">306</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.03</td>
+<td align="left">Waiheke</td>
+<td align="right">224</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.04</td>
+<td align="left">AKL_Central</td>
+<td align="right">17</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.04</td>
+<td align="left">AKL_North</td>
+<td align="right">96</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.04</td>
+<td align="left">AKL_Others</td>
+<td align="right">165</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.04</td>
+<td align="left">AKL_South</td>
+<td align="right">153</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.04</td>
+<td align="left">Waiheke</td>
+<td align="right">240</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.05</td>
+<td align="left">AKL_Central</td>
+<td align="right">161</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.05</td>
+<td align="left">AKL_North</td>
+<td align="right">223</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.05</td>
+<td align="left">AKL_Others</td>
+<td align="right">112</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.05</td>
+<td align="left">AKL_South</td>
+<td align="right">280</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.05</td>
+<td align="left">Waiheke</td>
+<td align="right">206</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.06</td>
+<td align="left">AKL_Central</td>
+<td align="right">371</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.06</td>
+<td align="left">AKL_North</td>
+<td align="right">209</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.06</td>
+<td align="left">AKL_Others</td>
+<td align="right">204</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.06</td>
+<td align="left">AKL_South</td>
+<td align="right">220</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.06</td>
+<td align="left">Waiheke</td>
+<td align="right">135</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.07</td>
+<td align="left">AKL_Central</td>
+<td align="right">334</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.07</td>
+<td align="left">AKL_North</td>
+<td align="right">312</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.07</td>
+<td align="left">AKL_Others</td>
+<td align="right">236</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.07</td>
+<td align="left">AKL_South</td>
+<td align="right">415</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.07</td>
+<td align="left">Waiheke</td>
+<td align="right">149</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.08</td>
+<td align="left">AKL_Central</td>
+<td align="right">322</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.08</td>
+<td align="left">AKL_North</td>
+<td align="right">381</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.08</td>
+<td align="left">AKL_Others</td>
+<td align="right">192</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.08</td>
+<td align="left">AKL_South</td>
+<td align="right">211</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.08</td>
+<td align="left">Waiheke</td>
+<td align="right">270</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.09</td>
+<td align="left">AKL_Central</td>
+<td align="right">300</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.09</td>
+<td align="left">AKL_North</td>
+<td align="right">235</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.09</td>
+<td align="left">AKL_Others</td>
+<td align="right">305</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.09</td>
+<td align="left">AKL_South</td>
+<td align="right">76</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.09</td>
+<td align="left">Waiheke</td>
+<td align="right">140</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.10</td>
+<td align="left">AKL_Central</td>
+<td align="right">158</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.10</td>
+<td align="left">AKL_North</td>
+<td align="right">117</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.10</td>
+<td align="left">AKL_Others</td>
+<td align="right">182</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.10</td>
+<td align="left">AKL_South</td>
+<td align="right">123</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.10</td>
+<td align="left">Waiheke</td>
+<td align="right">341</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.11</td>
+<td align="left">AKL_Central</td>
+<td align="right">244</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.11</td>
+<td align="left">AKL_North</td>
+<td align="right">193</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.11</td>
+<td align="left">AKL_Others</td>
+<td align="right">121</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.11</td>
+<td align="left">AKL_South</td>
+<td align="right">155</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.11</td>
+<td align="left">Waiheke</td>
+<td align="right">75</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.12</td>
+<td align="left">AKL_Central</td>
+<td align="right">193</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.12</td>
+<td align="left">AKL_North</td>
+<td align="right">346</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.12</td>
+<td align="left">AKL_Others</td>
+<td align="right">190</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.12</td>
+<td align="left">AKL_South</td>
+<td align="right">163</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.12</td>
+<td align="left">Waiheke</td>
+<td align="right">251</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.13</td>
+<td align="left">AKL_Central</td>
+<td align="right">195</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.13</td>
+<td align="left">AKL_North</td>
+<td align="right">148</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.13</td>
+<td align="left">AKL_Others</td>
+<td align="right">226</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.13</td>
+<td align="left">AKL_South</td>
+<td align="right">204</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.13</td>
+<td align="left">Waiheke</td>
+<td align="right">271</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.14</td>
+<td align="left">AKL_Central</td>
+<td align="right">160</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.14</td>
+<td align="left">AKL_North</td>
+<td align="right">236</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.14</td>
+<td align="left">AKL_Others</td>
+<td align="right">152</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.14</td>
+<td align="left">AKL_South</td>
+<td align="right">221</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.14</td>
+<td align="left">Waiheke</td>
+<td align="right">63</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.15</td>
+<td align="left">AKL_Central</td>
+<td align="right">129</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.15</td>
+<td align="left">AKL_North</td>
+<td align="right">184</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.15</td>
+<td align="left">AKL_Others</td>
+<td align="right">265</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.15</td>
+<td align="left">AKL_South</td>
+<td align="right">141</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.15</td>
+<td align="left">Waiheke</td>
+<td align="right">284</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.16</td>
+<td align="left">AKL_Central</td>
+<td align="right">386</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.16</td>
+<td align="left">AKL_North</td>
+<td align="right">337</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.16</td>
+<td align="left">AKL_Others</td>
+<td align="right">258</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.16</td>
+<td align="left">AKL_South</td>
+<td align="right">305</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.16</td>
+<td align="left">Waiheke</td>
+<td align="right">151</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.17</td>
+<td align="left">AKL_Central</td>
+<td align="right">65</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.17</td>
+<td align="left">AKL_North</td>
+<td align="right">326</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.17</td>
+<td align="left">AKL_Others</td>
+<td align="right">202</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.17</td>
+<td align="left">AKL_South</td>
+<td align="right">143</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.17</td>
+<td align="left">Waiheke</td>
+<td align="right">250</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.18</td>
+<td align="left">AKL_Central</td>
+<td align="right">185</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.18</td>
+<td align="left">AKL_North</td>
+<td align="right">315</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.18</td>
+<td align="left">AKL_Others</td>
+<td align="right">90</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.18</td>
+<td align="left">AKL_South</td>
+<td align="right">237</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.18</td>
+<td align="left">Waiheke</td>
+<td align="right">299</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.19</td>
+<td align="left">AKL_Central</td>
+<td align="right">113</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.19</td>
+<td align="left">AKL_North</td>
+<td align="right">164</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.19</td>
+<td align="left">AKL_Others</td>
+<td align="right">188</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.19</td>
+<td align="left">AKL_South</td>
+<td align="right">310</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.19</td>
+<td align="left">Waiheke</td>
+<td align="right">178</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.20</td>
+<td align="left">AKL_Central</td>
+<td align="right">244</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.20</td>
+<td align="left">AKL_North</td>
+<td align="right">107</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.20</td>
+<td align="left">AKL_Others</td>
+<td align="right">113</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.20</td>
+<td align="left">AKL_South</td>
+<td align="right">93</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.20</td>
+<td align="left">Waiheke</td>
+<td align="right">127</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.21</td>
+<td align="left">AKL_Central</td>
+<td align="right">371</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.21</td>
+<td align="left">AKL_North</td>
+<td align="right">292</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.21</td>
+<td align="left">AKL_Others</td>
+<td align="right">310</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.21</td>
+<td align="left">AKL_South</td>
+<td align="right">167</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.21</td>
+<td align="left">Waiheke</td>
+<td align="right">164</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.22</td>
+<td align="left">AKL_Central</td>
+<td align="right">380</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.22</td>
+<td align="left">AKL_North</td>
+<td align="right">197</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.22</td>
+<td align="left">AKL_Others</td>
+<td align="right">408</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.22</td>
+<td align="left">AKL_South</td>
+<td align="right">74</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.22</td>
+<td align="left">Waiheke</td>
+<td align="right">169</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.23</td>
+<td align="left">AKL_Central</td>
+<td align="right">298</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.23</td>
+<td align="left">AKL_North</td>
+<td align="right">277</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.23</td>
+<td align="left">AKL_Others</td>
+<td align="right">232</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.23</td>
+<td align="left">AKL_South</td>
+<td align="right">173</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.23</td>
+<td align="left">Waiheke</td>
+<td align="right">404</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.24</td>
+<td align="left">AKL_Central</td>
+<td align="right">280</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.24</td>
+<td align="left">AKL_North</td>
+<td align="right">189</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.24</td>
+<td align="left">AKL_Others</td>
+<td align="right">241</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.24</td>
+<td align="left">AKL_South</td>
+<td align="right">375</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.24</td>
+<td align="left">Waiheke</td>
+<td align="right">369</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.25</td>
+<td align="left">AKL_Central</td>
+<td align="right">355</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.25</td>
+<td align="left">AKL_North</td>
+<td align="right">283</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.25</td>
+<td align="left">AKL_Others</td>
+<td align="right">290</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.25</td>
+<td align="left">AKL_South</td>
+<td align="right">251</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.25</td>
+<td align="left">Waiheke</td>
+<td align="right">250</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.26</td>
+<td align="left">AKL_Central</td>
+<td align="right">166</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.26</td>
+<td align="left">AKL_North</td>
+<td align="right">215</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.26</td>
+<td align="left">AKL_Others</td>
+<td align="right">306</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.26</td>
+<td align="left">AKL_South</td>
+<td align="right">217</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.26</td>
+<td align="left">Waiheke</td>
+<td align="right">128</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.27</td>
+<td align="left">AKL_Central</td>
+<td align="right">279</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.27</td>
+<td align="left">AKL_North</td>
+<td align="right">144</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.27</td>
+<td align="left">AKL_Others</td>
+<td align="right">265</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.27</td>
+<td align="left">AKL_South</td>
+<td align="right">249</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.27</td>
+<td align="left">Waiheke</td>
+<td align="right">279</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.28</td>
+<td align="left">AKL_Central</td>
+<td align="right">117</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.28</td>
+<td align="left">AKL_North</td>
+<td align="right">283</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.28</td>
+<td align="left">AKL_Others</td>
+<td align="right">75</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.28</td>
+<td align="left">AKL_South</td>
+<td align="right">393</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.28</td>
+<td align="left">Waiheke</td>
+<td align="right">231</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.29</td>
+<td align="left">AKL_Central</td>
+<td align="right">300</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.29</td>
+<td align="left">AKL_North</td>
+<td align="right">407</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.29</td>
+<td align="left">AKL_Others</td>
+<td align="right">137</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.29</td>
+<td align="left">AKL_South</td>
+<td align="right">112</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.29</td>
+<td align="left">Waiheke</td>
+<td align="right">221</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.30</td>
+<td align="left">AKL_Central</td>
+<td align="right">293</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.30</td>
+<td align="left">AKL_North</td>
+<td align="right">125</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.30</td>
+<td align="left">AKL_Others</td>
+<td align="right">203</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.30</td>
+<td align="left">AKL_South</td>
+<td align="right">145</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.30</td>
+<td align="left">Waiheke</td>
+<td align="right">149</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.31</td>
+<td align="left">AKL_Central</td>
+<td align="right">256</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.31</td>
+<td align="left">AKL_North</td>
+<td align="right">181</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.31</td>
+<td align="left">AKL_Others</td>
+<td align="right">143</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.01.31</td>
+<td align="left">AKL_South</td>
+<td align="right">166</td>
+</tr>
+<tr class="even">
+<td align="left">2024.01.31</td>
+<td align="left">Waiheke</td>
+<td align="right">352</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.01</td>
+<td align="left">AKL_Central</td>
+<td align="right">311</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.01</td>
+<td align="left">AKL_North</td>
+<td align="right">247</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.01</td>
+<td align="left">AKL_Others</td>
+<td align="right">176</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.01</td>
+<td align="left">AKL_South</td>
+<td align="right">403</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.01</td>
+<td align="left">Waiheke</td>
+<td align="right">199</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.02</td>
+<td align="left">AKL_Central</td>
+<td align="right">351</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.02</td>
+<td align="left">AKL_North</td>
+<td align="right">93</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.02</td>
+<td align="left">AKL_Others</td>
+<td align="right">118</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.02</td>
+<td align="left">AKL_South</td>
+<td align="right">136</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.02</td>
+<td align="left">Waiheke</td>
+<td align="right">260</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.03</td>
+<td align="left">AKL_Central</td>
+<td align="right">308</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.03</td>
+<td align="left">AKL_North</td>
+<td align="right">261</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.03</td>
+<td align="left">AKL_Others</td>
+<td align="right">129</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.03</td>
+<td align="left">AKL_South</td>
+<td align="right">390</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.03</td>
+<td align="left">Waiheke</td>
+<td align="right">295</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.04</td>
+<td align="left">AKL_Central</td>
+<td align="right">214</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.04</td>
+<td align="left">AKL_North</td>
+<td align="right">269</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.04</td>
+<td align="left">AKL_Others</td>
+<td align="right">186</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.04</td>
+<td align="left">AKL_South</td>
+<td align="right">196</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.04</td>
+<td align="left">Waiheke</td>
+<td align="right">235</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.05</td>
+<td align="left">AKL_Central</td>
+<td align="right">119</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.05</td>
+<td align="left">AKL_North</td>
+<td align="right">113</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.05</td>
+<td align="left">AKL_Others</td>
+<td align="right">13</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.05</td>
+<td align="left">AKL_South</td>
+<td align="right">244</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.05</td>
+<td align="left">Waiheke</td>
+<td align="right">285</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.06</td>
+<td align="left">AKL_Central</td>
+<td align="right">286</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.06</td>
+<td align="left">AKL_North</td>
+<td align="right">301</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.06</td>
+<td align="left">AKL_Others</td>
+<td align="right">239</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.06</td>
+<td align="left">AKL_South</td>
+<td align="right">68</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.06</td>
+<td align="left">Waiheke</td>
+<td align="right">183</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.07</td>
+<td align="left">AKL_Central</td>
+<td align="right">203</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.07</td>
+<td align="left">AKL_North</td>
+<td align="right">357</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.07</td>
+<td align="left">AKL_Others</td>
+<td align="right">386</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.07</td>
+<td align="left">AKL_South</td>
+<td align="right">265</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.07</td>
+<td align="left">Waiheke</td>
+<td align="right">152</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.08</td>
+<td align="left">AKL_Central</td>
+<td align="right">182</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.08</td>
+<td align="left">AKL_North</td>
+<td align="right">333</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.08</td>
+<td align="left">AKL_Others</td>
+<td align="right">267</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.08</td>
+<td align="left">AKL_South</td>
+<td align="right">162</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.08</td>
+<td align="left">Waiheke</td>
+<td align="right">218</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.09</td>
+<td align="left">AKL_Central</td>
+<td align="right">303</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.09</td>
+<td align="left">AKL_North</td>
+<td align="right">125</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.09</td>
+<td align="left">AKL_Others</td>
+<td align="right">247</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.09</td>
+<td align="left">AKL_South</td>
+<td align="right">133</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.09</td>
+<td align="left">Waiheke</td>
+<td align="right">174</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.10</td>
+<td align="left">AKL_Central</td>
+<td align="right">62</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.10</td>
+<td align="left">AKL_North</td>
+<td align="right">204</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.10</td>
+<td align="left">AKL_Others</td>
+<td align="right">338</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.10</td>
+<td align="left">AKL_South</td>
+<td align="right">215</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.10</td>
+<td align="left">Waiheke</td>
+<td align="right">327</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.11</td>
+<td align="left">AKL_Central</td>
+<td align="right">103</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.11</td>
+<td align="left">AKL_North</td>
+<td align="right">260</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.11</td>
+<td align="left">AKL_Others</td>
+<td align="right">24</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.11</td>
+<td align="left">AKL_South</td>
+<td align="right">224</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.11</td>
+<td align="left">Waiheke</td>
+<td align="right">386</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.12</td>
+<td align="left">AKL_Central</td>
+<td align="right">175</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.12</td>
+<td align="left">AKL_North</td>
+<td align="right">225</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.12</td>
+<td align="left">AKL_Others</td>
+<td align="right">264</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.12</td>
+<td align="left">AKL_South</td>
+<td align="right">239</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.12</td>
+<td align="left">Waiheke</td>
+<td align="right">258</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.13</td>
+<td align="left">AKL_Central</td>
+<td align="right">394</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.13</td>
+<td align="left">AKL_North</td>
+<td align="right">145</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.13</td>
+<td align="left">AKL_Others</td>
+<td align="right">159</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.13</td>
+<td align="left">AKL_South</td>
+<td align="right">325</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.13</td>
+<td align="left">Waiheke</td>
+<td align="right">98</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.14</td>
+<td align="left">AKL_Central</td>
+<td align="right">332</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.14</td>
+<td align="left">AKL_North</td>
+<td align="right">107</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.14</td>
+<td align="left">AKL_Others</td>
+<td align="right">197</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.14</td>
+<td align="left">AKL_South</td>
+<td align="right">197</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.14</td>
+<td align="left">Waiheke</td>
+<td align="right">146</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.15</td>
+<td align="left">AKL_Central</td>
+<td align="right">393</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.15</td>
+<td align="left">AKL_North</td>
+<td align="right">337</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.15</td>
+<td align="left">AKL_Others</td>
+<td align="right">140</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.15</td>
+<td align="left">AKL_South</td>
+<td align="right">211</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.15</td>
+<td align="left">Waiheke</td>
+<td align="right">155</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.16</td>
+<td align="left">AKL_Central</td>
+<td align="right">119</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.16</td>
+<td align="left">AKL_North</td>
+<td align="right">444</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.16</td>
+<td align="left">AKL_Others</td>
+<td align="right">120</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.16</td>
+<td align="left">AKL_South</td>
+<td align="right">192</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.16</td>
+<td align="left">Waiheke</td>
+<td align="right">389</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.17</td>
+<td align="left">AKL_Central</td>
+<td align="right">172</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.17</td>
+<td align="left">AKL_North</td>
+<td align="right">261</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.17</td>
+<td align="left">AKL_Others</td>
+<td align="right">385</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.17</td>
+<td align="left">AKL_South</td>
+<td align="right">73</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.17</td>
+<td align="left">Waiheke</td>
+<td align="right">242</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.18</td>
+<td align="left">AKL_Central</td>
+<td align="right">319</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.18</td>
+<td align="left">AKL_North</td>
+<td align="right">78</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.18</td>
+<td align="left">AKL_Others</td>
+<td align="right">186</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.18</td>
+<td align="left">AKL_South</td>
+<td align="right">439</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.18</td>
+<td align="left">Waiheke</td>
+<td align="right">368</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.19</td>
+<td align="left">AKL_Central</td>
+<td align="right">243</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.19</td>
+<td align="left">AKL_North</td>
+<td align="right">157</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.19</td>
+<td align="left">AKL_Others</td>
+<td align="right">129</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.19</td>
+<td align="left">AKL_South</td>
+<td align="right">106</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.19</td>
+<td align="left">Waiheke</td>
+<td align="right">265</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.20</td>
+<td align="left">AKL_Central</td>
+<td align="right">169</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.20</td>
+<td align="left">AKL_North</td>
+<td align="right">211</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.20</td>
+<td align="left">AKL_Others</td>
+<td align="right">430</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.20</td>
+<td align="left">AKL_South</td>
+<td align="right">208</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.20</td>
+<td align="left">Waiheke</td>
+<td align="right">210</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.21</td>
+<td align="left">AKL_Central</td>
+<td align="right">350</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.21</td>
+<td align="left">AKL_North</td>
+<td align="right">229</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.21</td>
+<td align="left">AKL_Others</td>
+<td align="right">272</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.21</td>
+<td align="left">AKL_South</td>
+<td align="right">323</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.21</td>
+<td align="left">Waiheke</td>
+<td align="right">75</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.22</td>
+<td align="left">AKL_Central</td>
+<td align="right">360</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.22</td>
+<td align="left">AKL_North</td>
+<td align="right">129</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.22</td>
+<td align="left">AKL_Others</td>
+<td align="right">196</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.22</td>
+<td align="left">AKL_South</td>
+<td align="right">150</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.22</td>
+<td align="left">Waiheke</td>
+<td align="right">155</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.23</td>
+<td align="left">AKL_Central</td>
+<td align="right">169</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.23</td>
+<td align="left">AKL_North</td>
+<td align="right">329</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.23</td>
+<td align="left">AKL_Others</td>
+<td align="right">300</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.23</td>
+<td align="left">AKL_South</td>
+<td align="right">307</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.23</td>
+<td align="left">Waiheke</td>
+<td align="right">211</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.24</td>
+<td align="left">AKL_Central</td>
+<td align="right">332</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.24</td>
+<td align="left">AKL_North</td>
+<td align="right">186</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.24</td>
+<td align="left">AKL_Others</td>
+<td align="right">368</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.24</td>
+<td align="left">AKL_South</td>
+<td align="right">218</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.24</td>
+<td align="left">Waiheke</td>
+<td align="right">191</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.25</td>
+<td align="left">AKL_Central</td>
+<td align="right">251</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.25</td>
+<td align="left">AKL_North</td>
+<td align="right">216</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.25</td>
+<td align="left">AKL_Others</td>
+<td align="right">142</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.25</td>
+<td align="left">AKL_South</td>
+<td align="right">182</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.25</td>
+<td align="left">Waiheke</td>
+<td align="right">100</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.26</td>
+<td align="left">AKL_Central</td>
+<td align="right">443</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.26</td>
+<td align="left">AKL_North</td>
+<td align="right">399</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.26</td>
+<td align="left">AKL_Others</td>
+<td align="right">155</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.26</td>
+<td align="left">AKL_South</td>
+<td align="right">323</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.26</td>
+<td align="left">Waiheke</td>
+<td align="right">236</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.27</td>
+<td align="left">AKL_Central</td>
+<td align="right">228</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.27</td>
+<td align="left">AKL_North</td>
+<td align="right">274</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.27</td>
+<td align="left">AKL_Others</td>
+<td align="right">227</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.27</td>
+<td align="left">AKL_South</td>
+<td align="right">379</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.27</td>
+<td align="left">Waiheke</td>
+<td align="right">166</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.28</td>
+<td align="left">AKL_Central</td>
+<td align="right">324</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.28</td>
+<td align="left">AKL_North</td>
+<td align="right">280</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.28</td>
+<td align="left">AKL_Others</td>
+<td align="right">177</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.28</td>
+<td align="left">AKL_South</td>
+<td align="right">227</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.28</td>
+<td align="left">Waiheke</td>
+<td align="right">162</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.29</td>
+<td align="left">AKL_Central</td>
+<td align="right">217</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.29</td>
+<td align="left">AKL_North</td>
+<td align="right">134</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.29</td>
+<td align="left">AKL_Others</td>
+<td align="right">197</td>
+</tr>
+<tr class="even">
+<td align="left">2024.02.29</td>
+<td align="left">AKL_South</td>
+<td align="right">137</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.02.29</td>
+<td align="left">Waiheke</td>
+<td align="right">230</td>
+</tr>
+<tr class="even">
+<td align="left">2024.03.01</td>
+<td align="left">AKL_Central</td>
+<td align="right">238</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.03.01</td>
+<td align="left">AKL_North</td>
+<td align="right">192</td>
+</tr>
+<tr class="even">
+<td align="left">2024.03.01</td>
+<td align="left">AKL_Others</td>
+<td align="right">117</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.03.01</td>
+<td align="left">AKL_South</td>
+<td align="right">372</td>
+</tr>
+<tr class="even">
+<td align="left">2024.03.01</td>
+<td align="left">Waiheke</td>
+<td align="right">226</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.03.02</td>
+<td align="left">AKL_Central</td>
+<td align="right">260</td>
+</tr>
+<tr class="even">
+<td align="left">2024.03.02</td>
+<td align="left">AKL_North</td>
+<td align="right">192</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.03.02</td>
+<td align="left">AKL_Others</td>
+<td align="right">111</td>
+</tr>
+<tr class="even">
+<td align="left">2024.03.02</td>
+<td align="left">AKL_South</td>
+<td align="right">291</td>
+</tr>
+<tr class="odd">
+<td align="left">2024.03.02</td>
+<td align="left">Waiheke</td>
+<td align="right">261</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">alarms_region</th>
+<th align="right">average</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AKL_Central</td>
+<td align="right">245</td>
+</tr>
+<tr class="even">
+<td align="left">AKL_North</td>
+<td align="right">229</td>
+</tr>
+<tr class="odd">
+<td align="left">AKL_Others</td>
+<td align="right">209</td>
+</tr>
+<tr class="even">
+<td align="left">AKL_South</td>
+<td align="right">223</td>
+</tr>
+<tr class="odd">
+<td align="left">Waiheke</td>
+<td align="right">224</td>
+</tr>
+</tbody>
+</table>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">m_week_day</th>
+<th align="right">week_day_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mon</td>
+<td align="right">9059</td>
+</tr>
+<tr class="even">
+<td align="left">Wed</td>
+<td align="right">10668</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the
+code chunk to prevent printing of the R code that generated the
+plot.</p>
 </div>
 
 
