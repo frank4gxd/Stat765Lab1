@@ -2,7 +2,9 @@
 title: "Lab01MD"
 author: "Xiaodong Guo"
 date: "2024-03-02"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -26,7 +28,7 @@ You can also embed plots, for example:
 ```{r pressure, echo=FALSE}
 #plot(pressure)
 ```
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 library(tidyverse)
 library(lubridate)
 
@@ -118,5 +120,6 @@ knitr::kable(alarms_summary_by_wday.df)
 ##Comment from Frank Guo
  
 The rules of R language are too flexible and easy to be confused. Most functions are not easy to understand without a solid math background and, thus, not easy to be called correctly. For convenient purposes or other reasons, almost all the functions have too many vars, and they are not easy to understand deeply. It may be easy to start but hard to write well.
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
